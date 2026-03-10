@@ -21,6 +21,8 @@ resources:
         - task_key: data_contract_check
           notebook_task:
             notebook_path: ../src/data_contract_test.py
+          depends_on:
+            - task_key: data_ingestion
           environment: environment_key
 
       environments:
