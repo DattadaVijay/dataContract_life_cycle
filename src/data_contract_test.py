@@ -7,9 +7,21 @@ dbutils.library.restartPython()
 
 # COMMAND ----------
 
+import os
 from datacontract.data_contract import DataContract
 
-CONTRACT_PATH = "../contracts/datacontract.yaml"
+# Read from base_parameters passed by the job
+dbutils.widgets.text("DATACONTRACT_DATABRICKS_TOKEN", "")
+dbutils.widgets.text("DATACONTRACT_DATABRICKS_HOST", "")
+dbutils.widgets.text("DATACONTRACT_DATABRICKS_HTTP_PATH", "")
+
+os.environ["DATACONTRACT_DATABRICKS_TOKEN"]     = dbutils.widgets.get("DATACONTRACT_DATABRICKS_TOKEN")
+os.environ["DATACONTRACT_DATABRICKS_HOST"]      = dbutils.widgets.get("DATACONTRACT_DATABRICKS_HOST")
+os.environ["DATACONTRACT_DATABRICKS_HTTP_PATH"] = dbutils.widgets.get("DATACONTRACT_DATABRICKS_HTTP_PATH")
+
+# COMMAND ----------
+
+CONTRACT_PATH = "/Workspace/Users/dattada.vijay@gmail.com/.bundle/lifecycle/dev/files/contracts/datacontract.yaml"
 
 df = spark.table("data_contract_poc.finance.transactions")
 df.createOrReplaceTempView("transactions")
