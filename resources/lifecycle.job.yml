@@ -21,9 +21,9 @@ resources:
           notebook_task:
             notebook_path: ../src/data_contract_test.py
             base_parameters:
-              DATACONTRACT_DATABRICKS_TOKEN: ${secrets.DATABRICKS_TOKEN}
-              DATACONTRACT_DATABRICKS_HOST: ${secrets.DATABRICKS_HOST}
-              DATACONTRACT_DATABRICKS_HTTP_PATH: ${secrets.DATABRICKS_HTTP_PATH}
+              DATACONTRACT_DATABRICKS_HOST: ${var.DATACONTRACT_DATABRICKS_HOST}
+              DATACONTRACT_DATABRICKS_TOKEN: ${var.DATACONTRACT_DATABRICKS_TOKEN}
+              DATACONTRACT_DATABRICKS_HTTP_PATH: ${var.DATACONTRACT_DATABRICKS_HTTP_PATH}
           environment_key: default
 
       environments:
