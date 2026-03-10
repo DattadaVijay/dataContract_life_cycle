@@ -19,18 +19,11 @@ resources:
           depends_on:
             - task_key: data_ingestion
           notebook_task:
-            notebook_path: ./notebooks/datacontract_test.py
+            notebook_path: ./notebooks/data_contract_test.py
             base_parameters:
               DATACONTRACT_DATABRICKS_TOKEN: ${secrets.DATABRICKS_TOKEN}
               DATACONTRACT_DATABRICKS_HOST: ${secrets.DATABRICKS_HOST}
               DATACONTRACT_DATABRICKS_HTTP_PATH: ${secrets.DATABRICKS_HTTP_PATH}
-          libraries:
-            - pypi:
-                package: datacontract-cli[databricks]
-            - pypi:
-                package: soda-core
-            - pypi:
-                package: soda-core-spark-df
           environment_key: default
 
       environments:
