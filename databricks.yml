@@ -4,11 +4,6 @@ bundle:
   name: lifecycle
   uuid: 2ca12fbc-9c4a-4a26-baaf-1359d4362295
 
-artifacts:
-  python_artifact:
-    type: whl
-    build: uv build --wheel
-
 include:
   - resources/*.yml
   - resources/*/*.yml
