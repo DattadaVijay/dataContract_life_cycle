@@ -1,0 +1,18 @@
+resources:
+  jobs:
+    lifecycle_job:
+      name: lifecycle_job
+
+      email_notifications:
+        on_failure:
+          - dattada.vijay@gmail.com
+
+      tasks:
+        - task_key: notebook_task
+          notebook_task:
+            notebook_path: ../src/notebook.ipynb
+
+      environments:
+        - environment_key: default
+          spec:
+            environment_version: "4"

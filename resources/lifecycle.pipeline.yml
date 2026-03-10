@@ -1,0 +1,14 @@
+# The main pipeline for lifecycle
+resources:
+  pipelines:
+    lifecycle_pipeline:
+      name: lifecycle_pipeline
+      catalog: workspace
+      schema: lifecycle_${bundle.target}
+      serverless: true
+      libraries:
+        - notebook:
+            path: ../src/pipeline.ipynb
+
+      configuration:
+        bundle.sourcePath: ${workspace.file_path}/src
