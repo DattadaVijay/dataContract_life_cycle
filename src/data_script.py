@@ -3,12 +3,15 @@
 # COMMAND ----------
 
 from pyspark.sql import Row
-from pyspark.sql.types import StructType, StructField, StringType, DateType, DoubleType, TimestampType
+from pyspark.sql.types import StructType, StructField, StringType, DateType, DecimalType, TimestampType
+from decimal import Decimal
 from datetime import date, datetime
 
 CATALOG = "data_contract_poc"
 SCHEMA  = "finance"
 TABLE   = "transactions"
+
+spark.sql(f"DROP TABLE IF EXISTS {CATALOG}.{SCHEMA}.{TABLE}")
 
 # COMMAND ----------
 
@@ -26,7 +29,7 @@ spark.sql(f"""
         account_id         STRING,
         customer_name      STRING,
         transaction_date   DATE,
-        amount             DOUBLE,
+        amount             DECIMAL(38,0),
         currency           STRING,
         transaction_type   STRING,
         status             STRING,
@@ -40,14 +43,14 @@ print(f"✅ Table {CATALOG}.{SCHEMA}.{TABLE} ready")
 # COMMAND ----------
 
 dummy_data = [
-    Row("TXN001", "ACC001", "Alice Johnson",  date.today(), 1500.00, "USD", "CREDIT", "COMPLETED", "Amazon",     datetime.now()),
-    Row("TXN002", "ACC002", "Bob Smith",      date.today(),  200.50, "USD", "DEBIT",  "COMPLETED", "Starbucks",  datetime.now()),
-    Row("TXN003", "ACC001", "Alice Johnson",  date.today(), 3200.00, "GBP", "CREDIT", "PENDING",   "Stripe",     datetime.now()),
-    Row("TXN004", "ACC003", "Charlie Brown",  date.today(),  450.75, "EUR", "DEBIT",  "COMPLETED", "Netflix",    datetime.now()),
-    Row("TXN005", "ACC004", "Diana Prince",   date.today(), 8900.00, "USD", "CREDIT", "COMPLETED", "Salesforce", datetime.now()),
-    Row("TXN006", "ACC002", "Bob Smith",      date.today(),  120.00, "USD", "DEBIT",  "FAILED",    "Uber",       datetime.now()),
-    Row("TXN007", "ACC005", "Eve Turner",     date.today(), 5600.00, "USD", "CREDIT", "COMPLETED", "Apple",      datetime.now()),
-    Row("TXN008", "ACC003", "Charlie Brown",  date.today(),  980.00, "GBP", "DEBIT",  "COMPLETED", "HSBC",       datetime.now()),
+    Row("TXN001", "ACC001", "Alice Johnson",  date.today(), Decimal(1500), "USD", "CREDIT", "COMPLETED", "Amazon",     datetime.now()),
+    Row("TXN002", "ACC002", "Bob Smith",      date.today(), Decimal(200),  "USD", "DEBIT",  "COMPLETED", "Starbucks",  datetime.now()),
+    Row("TXN003", "ACC001", "Alice Johnson",  date.today(), Decimal(3200), "GBP", "CREDIT", "PENDING",   "Stripe",     datetime.now()),
+    Row("TXN004", "ACC003", "Charlie Brown",  date.today(), Decimal(450),  "EUR", "DEBIT",  "COMPLETED", "Netflix",    datetime.now()),
+    Row("TXN005", "ACC004", "Diana Prince",   date.today(), Decimal(8900), "USD", "CREDIT", "COMPLETED", "Salesforce", datetime.now()),
+    Row("TXN006", "ACC002", "Bob Smith",      date.today(), Decimal(120),  "USD", "DEBIT",  "FAILED",    "Uber",       datetime.now()),
+    Row("TXN007", "ACC005", "Eve Turner",     date.today(), Decimal(5600), "USD", "CREDIT", "COMPLETED", "Apple",      datetime.now()),
+    Row("TXN008", "ACC003", "Charlie Brown",  date.today(), Decimal(980),  "GBP", "DEBIT",  "COMPLETED", "HSBC",       datetime.now()),
 ]
 
 schema = StructType([
@@ -55,7 +58,7 @@ schema = StructType([
     StructField("account_id",       StringType()),
     StructField("customer_name",    StringType()),
     StructField("transaction_date", DateType()),
-    StructField("amount",           DoubleType()),
+    StructField("amount",           DecimalType(38, 0)),
     StructField("currency",         StringType()),
     StructField("transaction_type", StringType()),
     StructField("status",           StringType()),
