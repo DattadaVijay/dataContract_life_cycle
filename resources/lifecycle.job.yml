@@ -3,6 +3,11 @@ resources:
     lifecycle_job:
       name: lifecycle_job
 
+      tags:
+        environment: dev
+        domain: governance
+        product: datacontract_life_cycle
+
       email_notifications:
         on_failure:
           - dattada.vijay@gmail.com
