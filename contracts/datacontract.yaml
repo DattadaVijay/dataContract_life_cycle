@@ -20,7 +20,7 @@ schema:
      - name: my_field
        logicalType: string
        description: Description of the field
-#
+
 #servers:
 #  - server: production
 #    type: postgres
