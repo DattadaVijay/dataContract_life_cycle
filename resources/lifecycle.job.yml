@@ -19,7 +19,7 @@ resources:
           depends_on:
             - task_key: data_ingestion
           notebook_task:
-            notebook_path: ./notebooks/data_contract_test.py
+            notebook_path: ../src/data_contract_test.py
             base_parameters:
               DATACONTRACT_DATABRICKS_TOKEN: ${secrets.DATABRICKS_TOKEN}
               DATACONTRACT_DATABRICKS_HOST: ${secrets.DATABRICKS_HOST}
