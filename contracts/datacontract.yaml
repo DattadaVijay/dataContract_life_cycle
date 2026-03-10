@@ -98,16 +98,19 @@ schema:
         required: true
         example: "2024-01-05T10:00:00Z"
 
-servicelevels:
-  freshness:
-    description: Data must be refreshed at least once daily
-    schedule: "0 6 * * *"
-    threshold: 24h
+slaProperties:
+  - property: freshness
+    value: 24h
+    valueExt: daily
+    unit: hours
+    element: transactions.transaction_date
 
-  completeness:
-    description: No nulls allowed on required fields
-    threshold: 100%
+  - property: retention
+    value: 7
+    unit: years
+    element: transactions.transaction_date
 
-  retention:
-    description: Transactions data retained for 7 years
-    period: 7 years
+  - property: completeness
+    value: 100
+    unit: percent
+    element: transactions.transaction_id
