@@ -1,5 +1,6 @@
 # Databricks notebook source
-
+from pyspark.sql import Row
+from datetime import date, datetime
 # COMMAND ----------
 
 CATALOG = "data_contract_poc"
@@ -40,18 +41,15 @@ print(f"✅ Table {CATALOG}.{SCHEMA}.{TABLE} ready")
 # COMMAND ----------
 # Insert dummy data
 
-from pyspark.sql import Row
-from datetime import date, datetime
-
 dummy_data = [
-    Row("TXN001", "ACC001", "Alice Johnson",  date(2024, 1, 5),  1500.00, "USD", "CREDIT", "COMPLETED", "Amazon",       datetime.now()),
-    Row("TXN002", "ACC002", "Bob Smith",      date(2024, 1, 6),   200.50, "USD", "DEBIT",  "COMPLETED", "Starbucks",    datetime.now()),
-    Row("TXN003", "ACC001", "Alice Johnson",  date(2024, 1, 7),  3200.00, "GBP", "CREDIT", "PENDING",   "Stripe",       datetime.now()),
-    Row("TXN004", "ACC003", "Charlie Brown",  date(2024, 1, 8),   450.75, "EUR", "DEBIT",  "COMPLETED", "Netflix",      datetime.now()),
-    Row("TXN005", "ACC004", "Diana Prince",   date(2024, 1, 9),  8900.00, "USD", "CREDIT", "COMPLETED", "Salesforce",   datetime.now()),
-    Row("TXN006", "ACC002", "Bob Smith",      date(2024, 1, 10),  120.00, "USD", "DEBIT",  "FAILED",    "Uber",         datetime.now()),
-    Row("TXN007", "ACC005", "Eve Turner",     date(2024, 1, 11), 5600.00, "USD", "CREDIT", "COMPLETED", "Apple",        datetime.now()),
-    Row("TXN008", "ACC003", "Charlie Brown",  date(2024, 1, 12),  980.00, "GBP", "DEBIT",  "COMPLETED", "HSBC",         datetime.now()),
+    Row("TXN001", "ACC001", "Alice Johnson",  date.today(),  1500.00, "USD", "CREDIT", "COMPLETED", "Amazon",       datetime.now()),
+    Row("TXN002", "ACC002", "Bob Smith",      date.today(),   200.50, "USD", "DEBIT",  "COMPLETED", "Starbucks",    datetime.now()),
+    Row("TXN003", "ACC001", "Alice Johnson",  date.today(),  3200.00, "GBP", "CREDIT", "PENDING",   "Stripe",       datetime.now()),
+    Row("TXN004", "ACC003", "Charlie Brown",  date.today(),   450.75, "EUR", "DEBIT",  "COMPLETED", "Netflix",      datetime.now()),
+    Row("TXN005", "ACC004", "Diana Prince",   date.today(),  8900.00, "USD", "CREDIT", "COMPLETED", "Salesforce",   datetime.now()),
+    Row("TXN006", "ACC002", "Bob Smith",      date.today(),  120.00, "USD", "DEBIT",  "FAILED",    "Uber",         datetime.now()),
+    Row("TXN007", "ACC005", "Eve Turner",     date.today(), 5600.00, "USD", "CREDIT", "COMPLETED", "Apple",        datetime.now()),
+    Row("TXN008", "ACC003", "Charlie Brown",  date.today(),  980.00, "GBP", "DEBIT",  "COMPLETED", "HSBC",         datetime.now()),
 ]
 
 from pyspark.sql.types import StructType, StructField, StringType, DateType, DoubleType, TimestampType
