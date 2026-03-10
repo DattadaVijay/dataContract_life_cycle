@@ -10,7 +10,7 @@ team:
   description: Data stewards responsible for finance domain contracts
 
 servers:
-  production:
+  - server: production
     type: databricks
     host: dbc-e3761da8-7d95.cloud.databricks.com
     catalog: data_contract_poc
@@ -35,7 +35,7 @@ schema:
         logicalType: string
         description: Unique identifier for each transaction
         required: true
-        unique: true
+        isUnique: true
         example: "TXN001"
 
       - name: account_id
@@ -61,36 +61,24 @@ schema:
         logicalType: number
         description: Transaction amount in the specified currency
         required: true
-        minimum: 0
         example: 1500.00
 
       - name: currency
         logicalType: string
         description: ISO 4217 currency code
         required: true
-        enum:
-          - USD
-          - GBP
-          - EUR
         example: "USD"
 
       - name: transaction_type
         logicalType: string
         description: Whether the transaction is a credit or debit
         required: true
-        enum:
-          - CREDIT
-          - DEBIT
         example: "CREDIT"
 
       - name: status
         logicalType: string
         description: Current status of the transaction
         required: true
-        enum:
-          - COMPLETED
-          - PENDING
-          - FAILED
         example: "COMPLETED"
 
       - name: merchant
@@ -107,8 +95,7 @@ schema:
 
 slaProperties:
   - property: freshness
-    value: 24h
-    valueExt: daily
+    value: 24
     unit: hours
     element: transactions.transaction_date
 
