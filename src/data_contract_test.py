@@ -21,7 +21,7 @@ os.environ["DATACONTRACT_DATABRICKS_HTTP_PATH"] = dbutils.widgets.get("DATACONTR
 
 # COMMAND ----------
 
-CONTRACT_PATH = "/Volumes/governance_cat/contract_mgmt/contract"
+CONTRACT_PATH = "/Volumes/governance_cat/contract_mgmt/contract/datacontract.yaml"
 
 df = spark.table("data_contract_poc.finance.transactions")
 df.createOrReplaceTempView("transactions")
