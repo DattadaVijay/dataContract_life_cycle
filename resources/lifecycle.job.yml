@@ -2,30 +2,42 @@ resources:
   jobs:
     lifecycle_job:
       name: lifecycle_job
-
       tags:
         environment: dev
         domain: governance
         product: datacontract_life_cycle
-
       email_notifications:
         on_failure:
           - dattada.vijay@gmail.com
-
       tasks:
         - task_key: data_ingestion
           notebook_task:
             notebook_path: ../src/data_script.py
-          environment: environment_key
+          environment_key: default
 
-        - task_key: data_contract_check
-          notebook_task:
-            notebook_path: ../src/data_contract_test.py
+        - task_key: datacontract_test
           depends_on:
             - task_key: data_ingestion
-          environment: environment_key
+          notebook_task:
+            notebook_path: ./notebooks/datacontract_test.py
+            base_parameters:
+              DATACONTRACT_DATABRICKS_TOKEN: ${secrets.DATABRICKS_TOKEN}
+              DATACONTRACT_DATABRICKS_HOST: ${secrets.DATABRICKS_HOST}
+              DATACONTRACT_DATABRICKS_HTTP_PATH: ${secrets.DATABRICKS_HTTP_PATH}
+          libraries:
+            - pypi:
+                package: datacontract-cli[databricks]
+            - pypi:
+                package: soda-core
+            - pypi:
+                package: soda-core-spark-df
+          environment_key: default
 
       environments:
         - environment_key: default
           spec:
-            environment_version: "4"
+            client: "1"
+            dependencies:
+              - datacontract-cli[databricks]
+              - soda-core
+              - soda-core-spark-df
