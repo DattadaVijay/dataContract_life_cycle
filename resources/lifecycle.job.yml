@@ -13,9 +13,15 @@ resources:
           - dattada.vijay@gmail.com
 
       tasks:
-        - task_key: notebook_task
+        - task_key: data_ingestion
           notebook_task:
             notebook_path: ../src/data_script.py
+          environment: environment_key
+
+        - task_key: data_contract_check
+          notebook_task:
+            notebook_path: ../src/data_contract_test.py
+          environment: environment_key
 
       environments:
         - environment_key: default
