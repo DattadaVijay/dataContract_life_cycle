@@ -4,6 +4,17 @@ bundle:
   name: lifecycle
   uuid: 2ca12fbc-9c4a-4a26-baaf-1359d4362295
 
+variables:
+  DATACONTRACT_DATABRICKS_TOKEN:
+    description: Databricks token for datacontract-cli
+    default: ""
+  DATACONTRACT_DATABRICKS_HOST:
+    description: Databricks host for datacontract-cli
+    default: ""
+  DATACONTRACT_DATABRICKS_HTTP_PATH:
+    description: Databricks HTTP path for datacontract-cli
+    default: ""
+
 include:
   - resources/*.yml
   - resources/*/*.yml
