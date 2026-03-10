@@ -9,6 +9,13 @@ team:
   name: data_stewards
   description: Data stewards responsible for finance domain contracts
 
+servers:
+  production:
+    type: databricks
+    host: dbc-e3761da8-7d95.cloud.databricks.com
+    catalog: data_contract_poc
+    schema: finance
+
 description:
   purpose: >
     Defines the structure and quality expectations for the finance transactions table
