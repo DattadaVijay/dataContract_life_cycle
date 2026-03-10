@@ -29,6 +29,10 @@ jobs:
         run: databricks bundle validate
 
       - name: databricks bundle deploy
-        run: databricks bundle deploy --target dev --auto-approve
+        run: |
+          databricks bundle deploy --target dev --auto-approve \
+            --var="DATACONTRACT_DATABRICKS_HOST=${{ secrets.DATABRICKS_HOST }}" \
+            --var="DATACONTRACT_DATABRICKS_TOKEN=${{ secrets.DATABRICKS_TOKEN }}" \
+            --var="DATACONTRACT_DATABRICKS_HTTP_PATH=${{ secrets.DATABRICKS_HTTP_PATH }}"
 
     
