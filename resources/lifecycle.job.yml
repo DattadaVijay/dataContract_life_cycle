@@ -15,7 +15,7 @@ resources:
       tasks:
         - task_key: notebook_task
           notebook_task:
-            notebook_path: ../src/notebook.ipynb
+            notebook_path: ../src/data_script.py
 
       environments:
         - environment_key: default
