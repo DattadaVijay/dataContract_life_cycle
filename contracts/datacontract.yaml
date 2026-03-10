@@ -30,7 +30,6 @@ schema:
   - name: transactions
     description: Finance transactions table containing payment and account activity
     properties:
-
       - name: transaction_id
         logicalType: string
         description: Unique identifier for each transaction
@@ -58,7 +57,7 @@ schema:
         example: "2024-01-05"
 
       - name: amount
-        logicalType: double
+        logicalType: number
         description: Transaction amount in the specified currency
         required: true
         example: 1500.00
