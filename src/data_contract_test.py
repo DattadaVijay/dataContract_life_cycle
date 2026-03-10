@@ -9,7 +9,7 @@ dbutils.library.restartPython()
 
 from datacontract.data_contract import DataContract
 
-CONTRACT_PATH = "../contracts/datacontract.yml"
+CONTRACT_PATH = "../contracts/datacontract.yaml"
 
 df = spark.table("data_contract_poc.finance.transactions")
 df.createOrReplaceTempView("transactions")
